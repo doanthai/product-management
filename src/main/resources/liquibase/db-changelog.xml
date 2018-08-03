@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="create_table" author="thaidq">
+        <createTable tableName="tbl_user">
+            <column name="username" type="varchar(50)" >
+                <constraints primaryKey="true" primaryKeyName="user_pkey"/>
+            </column>
+            <column name="password_digest" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display_name" type="varchar(255)"/>
+            <column name="gender" type="tinyint"/>
+            <column name="address" type="varchar(255)"/>
+            <column name="avatar" type="varchar(255)"/>
+            <column name="birthday" type="datetime"/>
+            <column name="activation_digest" type="varchar(255)"/>
+            <column name="activated" type="boolean" defaultValue="false"/>
+            <column name="activated_at" type="datetime"/>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_at" type="datetime"/>
+            <column name="reset_digest" type="varchar(255)"/>
+            <column name="reset_sent_at" type="datetime"/>
+            <column name="role" type="varchar(50)"/>
+        </createTable>
+        <createTable tableName="tbl_unit">
+            <column name="unit_id" autoIncrement="true" type="int">
+                <constraints primaryKeyName="unit_pkey" primaryKey="true"/>
+            </column>
+            <column name="unit_name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="unit_desc" type="varchar(255)"/>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_at" type="datetime"/>
+            <column name="creator_username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updater_username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="tbl_product">
+            <column name="prod_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+            <column name="prod_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prod_desc" type="varchar(255)"/>
+            <column name="prod_image" type="varchar(255)"/>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_at" type="datetime"/>
+            <column name="creator_username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_creator_username" type="varchar(50)"/>
+        </createTable>
+        <createTable tableName="tbl_product_unit">
+            <column name="prod_id" type="int">
+                <constraints nullable="false" foreignKeyName="prod_foreign_key" references="tbl_product(prod_id)"/>
+            </column>
+            <column name="unit_id" type="int">
+                <constraints nullable="false" foreignKeyName="unit_foreign_key" references="tbl_unit(unit_id)"/>
+            </column>
+            <column name="price" type="double" defaultValue="0"/>
+        </createTable>
+        <addPrimaryKey tableName="tbl_product_unit" columnNames="prod_id,unit_id"/>
+    </changeSet>
+</databaseChangeLog>

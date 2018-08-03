@@ -26,3 +26,5 @@
 
 #properties file
 src/main/resources/application.properties
+log
+*.log
