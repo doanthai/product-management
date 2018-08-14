@@ -45,7 +45,7 @@ public class Product implements Serializable {
     @Column(name = "last_creator_username")
     private String lastCreatorUsername;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblProduct")
-    private Collection<ProductUnit> tblProductUnitCollection;
+    private Collection<ProductUnit> productUnits;
 
     public Product() {
     }
@@ -125,13 +125,12 @@ public class Product implements Serializable {
         this.lastCreatorUsername = lastCreatorUsername;
     }
 
-    @XmlTransient
-    public Collection<ProductUnit> getProductUnitCollection() {
-        return tblProductUnitCollection;
+    public Collection<ProductUnit> getProductUnits() {
+        return productUnits;
     }
 
-    public void setProductUnitCollection(Collection<ProductUnit> tblProductUnitCollection) {
-        this.tblProductUnitCollection = tblProductUnitCollection;
+    public void setProductUnits(Collection<ProductUnit> productUnits) {
+        this.productUnits = productUnits;
     }
 
     @Override
@@ -153,7 +152,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product[ prodId=" + prodId + " ]";
+        return "ProductDto[ prodId=" + prodId + " ]";
     }
     
 }

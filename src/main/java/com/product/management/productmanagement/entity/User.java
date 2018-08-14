@@ -232,7 +232,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User[ username=" + username + " ]";
+        return "UserDto[ username=" + username + " ]";
     }
     
 }

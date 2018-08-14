@@ -44,7 +44,7 @@ public class Unit implements Serializable {
     @Column(name = "last_updater_username")
     private String lastUpdaterUsername;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUnit")
-    private Collection<ProductUnit> tblProductUnitCollection;
+    private Collection<ProductUnit> productUnits;
 
     public Unit() {
     }
@@ -117,13 +117,12 @@ public class Unit implements Serializable {
         this.lastUpdaterUsername = lastUpdaterUsername;
     }
 
-    @XmlTransient
-    public Collection<ProductUnit> getTblProductUnitCollection() {
-        return tblProductUnitCollection;
+    public Collection<ProductUnit> getProductUnits() {
+        return productUnits;
     }
 
-    public void setTblProductUnitCollection(Collection<ProductUnit> tblProductUnitCollection) {
-        this.tblProductUnitCollection = tblProductUnitCollection;
+    public void setProductUnits(Collection<ProductUnit> productUnits) {
+        this.productUnits = productUnits;
     }
 
     @Override
@@ -145,7 +144,7 @@ public class Unit implements Serializable {
 
     @Override
     public String toString() {
-        return "Unit[ unitId=" + unitId + " ]";
+        return "UnitDto[ unitId=" + unitId + " ]";
     }
     
 }

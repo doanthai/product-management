@@ -1,10 +1,12 @@
-package com.product.management.productmanagement.entity;
+package com.product.management.productmanagement.entity.support;
+
+import com.product.management.productmanagement.entity.ILog;
 
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class ActionLog {
+public class ActionLog extends ILog {
 
     @Id
     private String id;
