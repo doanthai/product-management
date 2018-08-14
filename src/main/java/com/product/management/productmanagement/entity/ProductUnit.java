@@ -5,16 +5,9 @@
  */
 package com.product.management.productmanagement.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -22,44 +15,39 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tbl_product_unit")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TblProductUnit.findAll", query = "SELECT t FROM TblProductUnit t")
-    , @NamedQuery(name = "TblProductUnit.findByProdId", query = "SELECT t FROM TblProductUnit t WHERE t.tblProductUnitPK.prodId = :prodId")
-    , @NamedQuery(name = "TblProductUnit.findByUnitId", query = "SELECT t FROM TblProductUnit t WHERE t.tblProductUnitPK.unitId = :unitId")
-    , @NamedQuery(name = "TblProductUnit.findByPrice", query = "SELECT t FROM TblProductUnit t WHERE t.price = :price")})
-public class TblProductUnit implements Serializable {
+public class ProductUnit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected TblProductUnitPK tblProductUnitPK;
+    protected ProductUnitId productUnitId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Min(value = 0)
     @Column(name = "price")
     private Double price;
     @JoinColumn(name = "prod_id", referencedColumnName = "prod_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TblProduct tblProduct;
+    private Product product;
     @JoinColumn(name = "unit_id", referencedColumnName = "unit_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TblUnit tblUnit;
+    private Unit unit;
 
-    public TblProductUnit() {
+    public ProductUnit() {
     }
 
-    public TblProductUnit(TblProductUnitPK tblProductUnitPK) {
-        this.tblProductUnitPK = tblProductUnitPK;
+    public ProductUnit(ProductUnitId productUnitId) {
+        this.productUnitId = productUnitId;
     }
 
-    public TblProductUnit(int prodId, int unitId) {
-        this.tblProductUnitPK = new TblProductUnitPK(prodId, unitId);
+    public ProductUnit(int prodId, int unitId) {
+        this.productUnitId = new ProductUnitId(prodId, unitId);
     }
 
-    public TblProductUnitPK getTblProductUnitPK() {
-        return tblProductUnitPK;
+    public ProductUnitId getProductUnitId() {
+        return productUnitId;
     }
 
-    public void setTblProductUnitPK(TblProductUnitPK tblProductUnitPK) {
-        this.tblProductUnitPK = tblProductUnitPK;
+    public void setProductUnitId(ProductUnitId productUnitId) {
+        this.productUnitId = productUnitId;
     }
 
     public Double getPrice() {
@@ -70,45 +58,42 @@ public class TblProductUnit implements Serializable {
         this.price = price;
     }
 
-    public TblProduct getTblProduct() {
-        return tblProduct;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setTblProduct(TblProduct tblProduct) {
-        this.tblProduct = tblProduct;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public TblUnit getTblUnit() {
-        return tblUnit;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setTblUnit(TblUnit tblUnit) {
-        this.tblUnit = tblUnit;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tblProductUnitPK != null ? tblProductUnitPK.hashCode() : 0);
+        hash += (productUnitId != null ? productUnitId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblProductUnit)) {
+        if (!(object instanceof ProductUnit)) {
             return false;
         }
-        TblProductUnit other = (TblProductUnit) object;
-        if ((this.tblProductUnitPK == null && other.tblProductUnitPK != null) || (this.tblProductUnitPK != null && !this.tblProductUnitPK.equals(other.tblProductUnitPK))) {
-            return false;
-        }
-        return true;
+        ProductUnit other = (ProductUnit) object;
+        return (this.productUnitId != null || other.productUnitId == null) && (this.productUnitId == null || this.productUnitId.equals(other.productUnitId));
     }
 
     @Override
     public String toString() {
-        return "javaapplication1.TblProductUnit[ tblProductUnitPK=" + tblProductUnitPK + " ]";
+        return "ProductUnit[ productUnitId=" + productUnitId + " ]";
     }
     
 }

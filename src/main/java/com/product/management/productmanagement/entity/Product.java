@@ -5,24 +5,11 @@
  */
 package com.product.management.productmanagement.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  *
@@ -48,10 +35,10 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Timestamp createdAt;
     @Column(name = "last_updated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdatedAt;
+    private Timestamp lastUpdatedAt;
     @Basic(optional = false)
     @Column(name = "creator_username")
     private String creatorUsername;
@@ -67,7 +54,7 @@ public class Product implements Serializable {
         this.prodId = prodId;
     }
 
-    public Product(Integer prodId, String prodName, Date createdAt, String creatorUsername) {
+    public Product(Integer prodId, String prodName, Timestamp createdAt, String creatorUsername) {
         this.prodId = prodId;
         this.prodName = prodName;
         this.createdAt = createdAt;
@@ -106,19 +93,19 @@ public class Product implements Serializable {
         this.prodImage = prodImage;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getLastUpdatedAt() {
+    public Timestamp getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
-    public void setLastUpdatedAt(Date lastUpdatedAt) {
+    public void setLastUpdatedAt(Timestamp lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
@@ -161,15 +148,12 @@ public class Product implements Serializable {
             return false;
         }
         Product other = (Product) object;
-        if ((this.prodId == null && other.prodId != null) || (this.prodId != null && !this.prodId.equals(other.prodId))) {
-            return false;
-        }
-        return true;
+        return (this.prodId != null || other.prodId == null) && (this.prodId == null || this.prodId.equals(other.prodId));
     }
 
     @Override
     public String toString() {
-        return "javaapplication1.Product[ prodId=" + prodId + " ]";
+        return "Product[ prodId=" + prodId + " ]";
     }
     
 }

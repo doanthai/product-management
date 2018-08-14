@@ -5,18 +5,9 @@
  */
 package com.product.management.productmanagement.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Timestamp;
 
 /**
  *
@@ -24,27 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tbl_user")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TblUser.findAll", query = "SELECT t FROM TblUser t")
-    , @NamedQuery(name = "TblUser.findByUsername", query = "SELECT t FROM TblUser t WHERE t.username = :username")
-    , @NamedQuery(name = "TblUser.findByPasswordDigest", query = "SELECT t FROM TblUser t WHERE t.passwordDigest = :passwordDigest")
-    , @NamedQuery(name = "TblUser.findByEmail", query = "SELECT t FROM TblUser t WHERE t.email = :email")
-    , @NamedQuery(name = "TblUser.findByPhone", query = "SELECT t FROM TblUser t WHERE t.phone = :phone")
-    , @NamedQuery(name = "TblUser.findByDisplayName", query = "SELECT t FROM TblUser t WHERE t.displayName = :displayName")
-    , @NamedQuery(name = "TblUser.findByGender", query = "SELECT t FROM TblUser t WHERE t.gender = :gender")
-    , @NamedQuery(name = "TblUser.findByAddress", query = "SELECT t FROM TblUser t WHERE t.address = :address")
-    , @NamedQuery(name = "TblUser.findByAvatar", query = "SELECT t FROM TblUser t WHERE t.avatar = :avatar")
-    , @NamedQuery(name = "TblUser.findByBirthday", query = "SELECT t FROM TblUser t WHERE t.birthday = :birthday")
-    , @NamedQuery(name = "TblUser.findByActivationDigest", query = "SELECT t FROM TblUser t WHERE t.activationDigest = :activationDigest")
-    , @NamedQuery(name = "TblUser.findByActivated", query = "SELECT t FROM TblUser t WHERE t.activated = :activated")
-    , @NamedQuery(name = "TblUser.findByActivatedAt", query = "SELECT t FROM TblUser t WHERE t.activatedAt = :activatedAt")
-    , @NamedQuery(name = "TblUser.findByCreatedAt", query = "SELECT t FROM TblUser t WHERE t.createdAt = :createdAt")
-    , @NamedQuery(name = "TblUser.findByLastUpdatedAt", query = "SELECT t FROM TblUser t WHERE t.lastUpdatedAt = :lastUpdatedAt")
-    , @NamedQuery(name = "TblUser.findByResetDigest", query = "SELECT t FROM TblUser t WHERE t.resetDigest = :resetDigest")
-    , @NamedQuery(name = "TblUser.findByResetSentAt", query = "SELECT t FROM TblUser t WHERE t.resetSentAt = :resetSentAt")
-    , @NamedQuery(name = "TblUser.findByRole", query = "SELECT t FROM TblUser t WHERE t.role = :role")})
-public class TblUser implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,37 +40,37 @@ public class TblUser implements Serializable {
     private String avatar;
     @Column(name = "birthday")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date birthday;
+    private Timestamp birthday;
     @Column(name = "activation_digest")
     private String activationDigest;
     @Column(name = "activated")
     private Boolean activated;
     @Column(name = "activated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date activatedAt;
+    private Timestamp activatedAt;
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Timestamp createdAt;
     @Column(name = "last_updated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdatedAt;
+    private Timestamp lastUpdatedAt;
     @Column(name = "reset_digest")
     private String resetDigest;
     @Column(name = "reset_sent_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date resetSentAt;
+    private Timestamp resetSentAt;
     @Column(name = "role")
     private String role;
 
-    public TblUser() {
+    public User() {
     }
 
-    public TblUser(String username) {
+    public User(String username) {
         this.username = username;
     }
 
-    public TblUser(String username, String passwordDigest, String phone, Date createdAt) {
+    public User(String username, String passwordDigest, String phone, Timestamp createdAt) {
         this.username = username;
         this.passwordDigest = passwordDigest;
         this.phone = phone;
@@ -170,11 +141,11 @@ public class TblUser implements Serializable {
         this.avatar = avatar;
     }
 
-    public Date getBirthday() {
+    public Timestamp getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Timestamp birthday) {
         this.birthday = birthday;
     }
 
@@ -194,27 +165,27 @@ public class TblUser implements Serializable {
         this.activated = activated;
     }
 
-    public Date getActivatedAt() {
+    public Timestamp getActivatedAt() {
         return activatedAt;
     }
 
-    public void setActivatedAt(Date activatedAt) {
+    public void setActivatedAt(Timestamp activatedAt) {
         this.activatedAt = activatedAt;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getLastUpdatedAt() {
+    public Timestamp getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
-    public void setLastUpdatedAt(Date lastUpdatedAt) {
+    public void setLastUpdatedAt(Timestamp lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
@@ -226,11 +197,11 @@ public class TblUser implements Serializable {
         this.resetDigest = resetDigest;
     }
 
-    public Date getResetSentAt() {
+    public Timestamp getResetSentAt() {
         return resetSentAt;
     }
 
-    public void setResetSentAt(Date resetSentAt) {
+    public void setResetSentAt(Timestamp resetSentAt) {
         this.resetSentAt = resetSentAt;
     }
 
@@ -252,19 +223,16 @@ public class TblUser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblUser)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        TblUser other = (TblUser) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
-            return false;
-        }
-        return true;
+        User other = (User) object;
+        return (this.username != null || other.username == null) && (this.username == null || this.username.equals(other.username));
     }
 
     @Override
     public String toString() {
-        return "javaapplication1.TblUser[ username=" + username + " ]";
+        return "User[ username=" + username + " ]";
     }
     
 }
