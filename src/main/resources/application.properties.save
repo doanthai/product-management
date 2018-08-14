@@ -1,0 +1,34 @@
+#Locale and timezone
+        spring.mvc.locale=vi_VN
+        spring.jackson.locale=vi_VN
+        spring.jackson.time-zone=GMT+7
+        server.jetty.accesslog.time-zone=GMT+7
+        #MongoDB Config
+        spring.data.mongodb.uri=mongodb://localhost/product_management
+        spring.data.mongodb.database=product_management
+        spring.data.mongodb.host=localhost
+        spring.data.mongodb.port=27017
+        #Mysql Config
+        spring.datasource.url=jdbc:mysql://localhost:3306/product_management?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false
+        spring.datasource.username=root
+        spring.datasource.password=root
+        spring.datasource.tomcat.max-wait=20000
+        spring.datasource.tomcat.max-active=50
+        spring.datasource.tomcat.max-idle=20
+        spring.datasource.tomcat.min-idle=15
+        #Option Hibernate
+        spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect
+        spring.jpa.properties.hibernate.id.new_generator_mappings = false
+        spring.jpa.properties.hibernate.format_sql = true
+        #Log Config
+        logging.level.org.hibernate.SQL=DEBUG
+        logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+        logging.level.org.springframework.data=debug
+        logging.level.=error
+        logging.file=log/product_management.log
+        logging.file.max-size=999MB
+        #Liquibase
+        spring.liquibase.change-log=classpath:liquibase/db-changelog.xml
+        #Server Domain
+        server.cross_origin=http://localhost:8080
+        server.domain=http://localhost:8080
