@@ -5,17 +5,17 @@
  */
 package com.product.management.productmanagement.entity;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  *
  * @author thaidq2
  */
 @Embeddable
-public class TblProductUnitPK implements Serializable {
+public class ProductUnitId implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "prod_id")
@@ -24,10 +24,10 @@ public class TblProductUnitPK implements Serializable {
     @Column(name = "unit_id")
     private int unitId;
 
-    public TblProductUnitPK() {
+    public ProductUnitId() {
     }
 
-    public TblProductUnitPK(int prodId, int unitId) {
+    public ProductUnitId(int prodId, int unitId) {
         this.prodId = prodId;
         this.unitId = unitId;
     }
@@ -51,30 +51,27 @@ public class TblProductUnitPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) prodId;
-        hash += (int) unitId;
+        hash += prodId;
+        hash += unitId;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblProductUnitPK)) {
+        if (!(object instanceof ProductUnitId)) {
             return false;
         }
-        TblProductUnitPK other = (TblProductUnitPK) object;
+        ProductUnitId other = (ProductUnitId) object;
         if (this.prodId != other.prodId) {
             return false;
         }
-        if (this.unitId != other.unitId) {
-            return false;
-        }
-        return true;
+        return this.unitId == other.unitId;
     }
 
     @Override
     public String toString() {
-        return "javaapplication1.TblProductUnitPK[ prodId=" + prodId + ", unitId=" + unitId + " ]";
+        return "ProductUnitId[ prodId=" + prodId + ", unitId=" + unitId + " ]";
     }
     
 }

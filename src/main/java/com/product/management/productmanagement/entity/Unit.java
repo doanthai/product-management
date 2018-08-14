@@ -5,24 +5,11 @@
  */
 package com.product.management.productmanagement.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  *
@@ -30,17 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tbl_unit")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TblUnit.findAll", query = "SELECT t FROM TblUnit t")
-    , @NamedQuery(name = "TblUnit.findByUnitId", query = "SELECT t FROM TblUnit t WHERE t.unitId = :unitId")
-    , @NamedQuery(name = "TblUnit.findByUnitName", query = "SELECT t FROM TblUnit t WHERE t.unitName = :unitName")
-    , @NamedQuery(name = "TblUnit.findByUnitDesc", query = "SELECT t FROM TblUnit t WHERE t.unitDesc = :unitDesc")
-    , @NamedQuery(name = "TblUnit.findByCreatedAt", query = "SELECT t FROM TblUnit t WHERE t.createdAt = :createdAt")
-    , @NamedQuery(name = "TblUnit.findByLastUpdatedAt", query = "SELECT t FROM TblUnit t WHERE t.lastUpdatedAt = :lastUpdatedAt")
-    , @NamedQuery(name = "TblUnit.findByCreatorUsername", query = "SELECT t FROM TblUnit t WHERE t.creatorUsername = :creatorUsername")
-    , @NamedQuery(name = "TblUnit.findByLastUpdaterUsername", query = "SELECT t FROM TblUnit t WHERE t.lastUpdaterUsername = :lastUpdaterUsername")})
-public class TblUnit implements Serializable {
+public class Unit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,10 +33,10 @@ public class TblUnit implements Serializable {
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Timestamp createdAt;
     @Column(name = "last_updated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdatedAt;
+    private Timestamp lastUpdatedAt;
     @Basic(optional = false)
     @Column(name = "creator_username")
     private String creatorUsername;
@@ -69,14 +46,14 @@ public class TblUnit implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUnit")
     private Collection<ProductUnit> tblProductUnitCollection;
 
-    public TblUnit() {
+    public Unit() {
     }
 
-    public TblUnit(Integer unitId) {
+    public Unit(Integer unitId) {
         this.unitId = unitId;
     }
 
-    public TblUnit(Integer unitId, String unitName, Date createdAt, String creatorUsername, String lastUpdaterUsername) {
+    public Unit(Integer unitId, String unitName, Timestamp createdAt, String creatorUsername, String lastUpdaterUsername) {
         this.unitId = unitId;
         this.unitName = unitName;
         this.createdAt = createdAt;
@@ -108,19 +85,19 @@ public class TblUnit implements Serializable {
         this.unitDesc = unitDesc;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getLastUpdatedAt() {
+    public Timestamp getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
-    public void setLastUpdatedAt(Date lastUpdatedAt) {
+    public void setLastUpdatedAt(Timestamp lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
@@ -159,19 +136,16 @@ public class TblUnit implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblUnit)) {
+        if (!(object instanceof Unit)) {
             return false;
         }
-        TblUnit other = (TblUnit) object;
-        if ((this.unitId == null && other.unitId != null) || (this.unitId != null && !this.unitId.equals(other.unitId))) {
-            return false;
-        }
-        return true;
+        Unit other = (Unit) object;
+        return (this.unitId != null || other.unitId == null) && (this.unitId == null || this.unitId.equals(other.unitId));
     }
 
     @Override
     public String toString() {
-        return "javaapplication1.TblUnit[ unitId=" + unitId + " ]";
+        return "Unit[ unitId=" + unitId + " ]";
     }
     
 }
