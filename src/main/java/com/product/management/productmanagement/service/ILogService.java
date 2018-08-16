@@ -5,8 +5,9 @@ import com.product.management.productmanagement.entity.ILog;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-public interface ILogService<D, K extends String, E extends ILog> {
-    Collection<D> loadAll();
-    void addLog(D object);
-    Collection<D> fetchByTime(Timestamp startTime, Timestamp endTime);
+public interface ILogService<E extends ILog, K extends String> {
+    Collection<E> loadAll();
+    void addLog(E object);
+    void addLog(String username, String message, String type);
+    Collection<E> fetchByTime(Timestamp startTime, Timestamp endTime);
 }
