@@ -71,7 +71,7 @@ public class ProductUnitId implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductUnitId[ prodId=" + prodId + ", unitId=" + unitId + " ]";
+        return "ProductUnitIdDto[ prodId=" + prodId + ", unitId=" + unitId + " ]";
     }
     
 }

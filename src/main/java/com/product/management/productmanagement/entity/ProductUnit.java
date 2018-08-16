@@ -93,7 +93,7 @@ public class ProductUnit implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductUnit[ productUnitId=" + productUnitId + " ]";
+        return "ProductUnitDto[ productUnitIdDto=" + productUnitId + " ]";
     }
     
 }

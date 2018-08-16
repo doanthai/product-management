@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column(name = "display_name")
     private String displayName;
     @Column(name = "gender")
-    private Short gender;
+    private Integer gender;
     @Column(name = "address")
     private String address;
     @Column(name = "avatar")
@@ -117,11 +117,11 @@ public class User implements Serializable {
         this.displayName = displayName;
     }
 
-    public Short getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Short gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -232,7 +232,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User[ username=" + username + " ]";
+        return "UserDto[ username=" + username + " ]";
     }
     
 }

@@ -1,10 +1,16 @@
-package com.product.management.productmanagement.entity;
+package com.product.management.productmanagement.entity.support;
+
+import com.product.management.productmanagement.entity.ILog;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class ActionLog {
+@Data
+@Builder
+public class ActionLog implements ILog {
 
     @Id
     private String id;
