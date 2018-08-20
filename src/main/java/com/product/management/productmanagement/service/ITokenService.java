@@ -2,8 +2,8 @@ package com.product.management.productmanagement.service;
 
 import com.product.management.productmanagement.exception.support.NotTokenPmException;
 
-public interface ITokenAuthService<U> {
+public interface ITokenService<U, CU> {
     String encodeToken(U object);
-    boolean verifyToken(String token);
-    U decodeToken(String token) throws NotTokenPmException;
+    boolean verifyTokenClaim(U user, CU currentUser);
+    CU decodeToken(String token) throws NotTokenPmException;
 }

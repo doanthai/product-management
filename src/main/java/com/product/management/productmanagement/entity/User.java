@@ -39,26 +39,21 @@ public class User implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @Column(name = "birthday")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp birthday;
     @Column(name = "activation_digest")
     private String activationDigest;
     @Column(name = "activated")
     private Boolean activated;
     @Column(name = "activated_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp activatedAt;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp createdAt;
     @Column(name = "last_updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastUpdatedAt;
     @Column(name = "reset_digest")
     private String resetDigest;
     @Column(name = "reset_sent_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp resetSentAt;
     @Column(name = "role")
     private String role;
@@ -75,6 +70,9 @@ public class User implements Serializable {
         this.passwordDigest = passwordDigest;
         this.phone = phone;
         this.createdAt = createdAt;
+    }
+
+    public User(String username, String password) {
     }
 
     public String getUsername() {

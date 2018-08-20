@@ -34,17 +34,15 @@ public class Product implements Serializable {
     private String prodImage;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp createdAt;
     @Column(name = "last_updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastUpdatedAt;
     @Basic(optional = false)
     @Column(name = "creator_username")
     private String creatorUsername;
     @Column(name = "last_creator_username")
     private String lastCreatorUsername;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblProduct")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<ProductUnit> productUnits;
 
     public Product() {

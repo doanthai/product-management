@@ -32,10 +32,8 @@ public class Unit implements Serializable {
     private String unitDesc;
     @Basic(optional = false)
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp createdAt;
     @Column(name = "last_updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastUpdatedAt;
     @Basic(optional = false)
     @Column(name = "creator_username")
@@ -43,7 +41,7 @@ public class Unit implements Serializable {
     @Basic(optional = false)
     @Column(name = "last_updater_username")
     private String lastUpdaterUsername;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUnit")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unit")
     private Collection<ProductUnit> productUnits;
 
     public Unit() {
